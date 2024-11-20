@@ -52,9 +52,6 @@ for ii=1:length(u_exc)-1
         x_ij=x_i(ii+1);
         x_i(ii+1)=x_i(ii+1)+Dx;
 
-        % fs_i(ii+1)=fs_i(ii+1)+k1*(x_i(ii+1)-x_ij)+k2*(x_i(ii+1)^2-x_ij^2)+k3*(x_i(ii+1)^3-x_ij^3);
-        % kT_i(ii+1)=k1+k2*2*x_i(ii+1)+k3*3*x_i(ii+1)^2;
-
         fs_i(ii+1)=fs_i(ii+1)+k1*(x_i(ii+1)-x_ij)+k3*(x_i(ii+1)^3-x_ij^3);
         kT_i(ii+1)=k1+k3*3*x_i(ii+1)^2;
 
