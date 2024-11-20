@@ -10,7 +10,7 @@ Laboratoire de Mécanique des Contacts et des Structures (LAMCOS), INSA de Lyon
 
 ## Data-driven model-free Solver
 <p align="center">
-  <img src="figures/general_dd_diagram.pdf" width="250"/>  &ensp;        <img src="figures/exp_setup_scheme.png" width="420"/> 
+  <img src="figures/general_dd_diagram.png" width="250"/>  &ensp;        <img src="figures/experimental setup.png" width="420"/> 
 </p>
 
 ## License
