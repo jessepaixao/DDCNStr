@@ -225,7 +225,7 @@ for kk=1:opt_data(jj+1).steps-1
     plot(opt_data(jj+1).x(kk+1),opt_data(jj+1).fn(kk+1),'mo','MarkerFaceColor','m','MarkerSize',4);
     plot(x_test(jj+1),fnl_test(jj+1),'o','Linewidth',1,'MarkerSize',6,'MarkerFaceColor','y','MarkerEdgeColor','k'); hold on
 end
-legend('Dataset','Constraint','$z^{*(k)}_j$','Ellipse','$z^{(k)}_{i}$','Ref. Sol.($t_i^{(k)}$)','Position',[0.0927602729875811 0.923259311739601 0.583537813834825 0.0764357134534849],...
+legend('Dataset','Constraint','$z^{*(k)}_j$','Ellipse','$z^{(k)}_{i}$','Ref. Sol.($t_i$)','Position',[0.0927602729875811 0.923259311739601 0.583537813834825 0.0764357134534849],...
     'Orientation','horizontal')
 ylabel('$f_{nl}$ (N)')
 xlabel('$x$ (m)')
@@ -267,7 +267,7 @@ exportgraphics(gcf,'figures/duffing_2D_ellipses_t3.pdf','ContentType','vector',"
 % close all
 
 jj=length(x_rec)-1;
-
+colororder({'k','k'})
 
 % FIGURE 3a
 figure(1)
@@ -276,20 +276,32 @@ set(gcf,'units','normalized','outerposition',[0 0 1 1])
 % subplot(311)
 tiledlayout(3,1);
 nexttile;
+yyaxis left
 plot(tspan_test(1:jj+1),x_test(1:jj+1),'k-','MarkerSize',10,'Linewidth',1.5,'MarkerSize',12); hold on
 plot(tspan_test(1:jj+1),x_rec(1:jj+1),'b--','MarkerSize',10,'Linewidth',1,'MarkerSize',12); hold on
-plot(tspan_test(1:jj+1),(x_rec(1:jj+1)-x_test(1:jj+1)),'g-','Linewidth',1,'MarkerSize',12); hold on
 ylabel('$x$(m)')
 xlim([0 tspan_test(end)])
-legend('Ref. Sol.(Test)','Data-driven Pred.','Abs. Error','Position',[0.814874414987007 0.860141179740593 0.176713387326348 0.134762401526625])
+yyaxis right
+plot(tspan_test(1:jj+1),(x_rec(1:jj+1)-x_test(1:jj+1))./max(x_test(1:jj+1))*100,'g-','Linewidth',1,'MarkerSize',12); hold on
+ylabel('$e_r(\%)$')
+ylim([-5 5])
+
+legend('Ref. Sol.(Test)','Data-driven Pred.','Error','Orientation','horizontal','Position',[0.275790201248844 0.929407711887819 0.447658799802681 0.0479338859083239])
+% legend('Ref. Sol.(Test)','Data-driven Pred.','Abs. Error','Position',[0.814874414987007 0.860141179740593 0.176713387326348 0.134762401526625])
 % Subplot 2
 % subplot(312)
 nexttile;
+yyaxis left
 plot(tspan_test(1:jj+1),fnl_test(1:jj+1),'k-','MarkerSize',10,'Linewidth',1.5,'MarkerSize',12); hold on
 plot(tspan_test(1:jj+1),fn_rec(1:jj+1),'b--','MarkerSize',10,'Linewidth',1,'MarkerSize',12); hold on
-plot(tspan_test(1:jj+1),(fn_rec(1:jj+1)-fnl_test(1:jj+1)),'g-','Linewidth',1,'MarkerSize',12); hold on
 xlabel('t(s)')
 ylabel('$f_{nl}$ (N)')
+yyaxis right
+plot(tspan_test(1:jj+1),(fn_rec(1:jj+1)-fnl_test(1:jj+1))./max(fnl_test(1:jj+1))*100,'g-','Linewidth',1,'MarkerSize',12); hold on
+ylabel('$e_r(\%)$')
+ylim([-5 5])
+% plot(tspan_test(1:jj+1),(fn_rec(1:jj+1)-fnl_test(1:jj+1)),'g-','Linewidth',1,'MarkerSize',12); hold on
+
 xlim([0 tspan_test(end)])
 % Subplot 3
 % subplot(313)

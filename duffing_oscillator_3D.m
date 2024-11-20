@@ -248,29 +248,45 @@ plot_animation_driven_solver_formulation4(Z_rec,Z_star,Z_test,opt_data,tspan_tes
 close all
 
 jj=length(x_rec)-1;
-
+% 
+err_scale=20;
 figure()
+colororder({'k','k'})
 set(gcf,'units','normalized','outerposition',[0 0 1 1])
 subplot(411)
+yyaxis left
 plot(tspan_test(1:jj+1),x_test(1:jj+1),'k-','MarkerSize',10,'Linewidth',1.5,'MarkerSize',12); hold on
 plot(tspan_test(1:jj+1),x_rec(1:jj+1),'b--','MarkerSize',10,'Linewidth',1,'MarkerSize',12); hold on
-plot(tspan_test(1:jj+1),(x_rec(1:jj+1)-x_test(1:jj+1)),'g-','MarkerSize',10,'Linewidth',1,'MarkerSize',12); hold on
 ylabel('$x$(m)')
 xlim([0 tspan_test(end)])
-legend('Ref. Sol. (Test)','Data-driven Pred.','Abs. Error','Position',[0.855581709990948 0.879909955777893 0.122161016963136 0.106869838878143])
+yyaxis right
+plot(tspan_test(1:jj+1),(x_rec(1:jj+1)-x_test(1:jj+1))./max(x_test(1:jj+1))*100,'g-','Linewidth',1,'MarkerSize',12); hold on
+ylabel('$e_r(\%)$')
+ylim([-err_scale err_scale])
+legend('Ref. Sol.(Test)','Data-driven Pred.','Error','Orientation','horizontal','Position',[0.34707720191184 0.935482599474618 0.337815893075893 0.0412307490406384])
+% legend('Ref. Sol. (Test)','Data-driven Pred.','Abs. Error','Position',[0.855581709990948 0.879909955777893 0.122161016963136 0.106869838878143])
 subplot(412)
+yyaxis left
 plot(tspan_test(1:jj+1),dx_test(1:jj+1),'k-','MarkerSize',10,'Linewidth',1.5,'MarkerSize',12); hold on
 plot(tspan_test(1:jj+1),dx_rec(1:jj+1),'b--','MarkerSize',10,'Linewidth',1,'MarkerSize',12); hold on
-plot(tspan_test(1:jj+1),(dx_rec(1:jj+1)-dx_test(1:jj+1)),'g-','MarkerSize',10,'Linewidth',1,'MarkerSize',12); hold on
+% plot(tspan_test(1:jj+1),(dx_rec(1:jj+1)-dx_test(1:jj+1)),'g-','MarkerSize',10,'Linewidth',1,'MarkerSize',12); hold on
 ylabel('$\dot{x}$(m/s)')
 xlim([0 tspan_test(end)])
+yyaxis right
+plot(tspan_test(1:jj+1),(dx_rec(1:jj+1)-dx_test(1:jj+1))./max(dx_test(1:jj+1))*100,'g-','Linewidth',1,'MarkerSize',12); hold on
+ylabel('$e_r(\%)$')
+ylim([-err_scale err_scale])
 subplot(413)
 plot(tspan_test(1:jj+1),fr_test(1:jj+1),'k-','MarkerSize',10,'Linewidth',1.5,'MarkerSize',12); hold on
 plot(tspan_test(1:jj+1),fr_rec(1:jj+1),'b--','MarkerSize',10,'Linewidth',1,'MarkerSize',12); hold on
-plot(tspan_test(1:jj+1),(fr_rec(1:jj+1)-fr_test(1:jj+1)),'g-','MarkerSize',10,'Linewidth',1,'MarkerSize',12); hold on
+% plot(tspan_test(1:jj+1),(fr_rec(1:jj+1)-fr_test(1:jj+1)),'g-','MarkerSize',10,'Linewidth',1,'MarkerSize',12); hold on
 xlabel('t(s)')
 ylabel('$f_r$ (N)')
 xlim([0 tspan_test(end)])
+yyaxis right
+plot(tspan_test(1:jj+1),(fr_rec(1:jj+1)-fr_test(1:jj+1))./max(fr_test(1:jj+1))*100,'g-','Linewidth',1,'MarkerSize',12); hold on
+ylabel('$e_r(\%)$')
+ylim([-err_scale err_scale])
 subplot(414)
 bar(tspan_test(2:jj+1),vertcat(opt_data(:).steps),'b'); hold on
 % ylim([0,20])
